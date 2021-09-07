@@ -1,5 +1,5 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
   // 컴파일 + 번들링된 js 파일이 저장될 경로와 이름 지정
   output: {
     path: path.resolve(__dirname, "public"), // bundle만들어질 장소
-    filename: "index_bundle.js", // bundle 될 파일 이름
+    filename: "js/index_bundle.js", // bundle 될 파일 이름
     publicPath: "http://localhost:3000/public" //웹팩 미들웨어 장소
   },
   module: {
@@ -27,13 +27,14 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: ["style-loader", "css-loader", "sass-loader"],
         exclude: /node_modules/
       }
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "./css/style.css" }),
+    // MiniCssExtractPlugin 은 배포할때 사용하면 좋음.
+    // new MiniCssExtractPlugin({ filename: "./css/style.css" }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html",
